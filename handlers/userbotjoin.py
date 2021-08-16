@@ -34,7 +34,7 @@ async def addchannel(client, message):
         print(e)
         await message.reply_text(
             f"<b>🛑 Zaman Aşımı Hatası 🛑 \n User {user.first_name} userbot için yoğun katılma istekleri nedeniyle grubunuza katılamadı! Asistanın grupta yasaklanmadığından emin olun."
-            "\n\n Yada @Sohbet_Muzik_Bot Hesabını Gruba Kendin Ekle </b>",
+            "\n\n Yada @MissMuzikAsistan Hesabını Gruba Kendin Ekle </b>",
         )
         return
     await message.reply_text(
