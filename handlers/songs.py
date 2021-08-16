@@ -45,7 +45,7 @@ def song(client, message):
         )
         print(str(e))
         return
-    m.edit("İndiriliyor...")
+    m.edit("📥İndiriliyor...")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
