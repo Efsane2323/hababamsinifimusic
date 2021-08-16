@@ -2,51 +2,44 @@ from pyrogram import Client, filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 
 from config import BOT_NAME as bn
-from helpers.filters import other_filters2
 
 
-@Client.on_message(other_filters2)
+
+
+@Client.on_message(filters.command("start") & filters.private & ~filters.channel)
 async def start(_, message: Message):
-    await message.reply_sticker("CAACAgQAAx0CTv65QgABBfJlYF6VCrGMm6OJ23AxHmD6qUSWESsAAhoQAAKm8XEeD5nrjz5IJFYeBA")
     await message.reply_text(
-        f"""**Hey, I'm {bn} 🎵
-
-I can play music in your group's voice call. Developed by [Jason](https://t.me/ImJanindu).
-
-Add me to your group and play music freely!**
-        """,
+        f"""𝙼𝚎𝚛𝚑𝚊𝚋𝚊👋 𝙱𝚎𝚗 𝚃𝚎𝚕𝚎𝚐𝚛𝚊𝚖 𝙶𝚛𝚞𝚙𝚕𝚊𝚛ı𝚗𝚍𝚊 𝙱𝚊𝚗 𝚈𝚎𝚝𝚔𝚒𝚜𝚒 𝙾𝚕𝚖𝚊𝚍𝚊𝚗 𝙼ü𝚣𝚒𝚔 Ç𝚊𝚕𝚊𝚋𝚒𝚕𝚒𝚢𝚘𝚛𝚞𝚖. 𝙶𝚛𝚞𝚋𝚞𝚗𝚞𝚣𝚞𝚗 𝚜𝚎𝚜𝚕𝚒 𝚜𝚘𝚑𝚋𝚎𝚝𝚒𝚗𝚍𝚎 𝚖ü𝚣𝚒𝚔 ç𝚊𝚕𝚊𝚋𝚒𝚕𝚖𝚎𝚔 𝚒ç𝚒𝚗 𝙰𝚜𝚒𝚜𝚝𝚊𝚗ı𝚗 𝚐𝚛𝚞𝚋𝚞𝚗𝚞𝚣𝚍𝚊 𝚘𝚕𝚖𝚊𝚜ı 𝚐𝚎𝚛𝚎𝚔𝚒𝚛. 𝙰𝚂İ𝚂𝚃𝙰𝙽; @Mis_MusicBot.""",
         reply_markup=InlineKeyboardMarkup(
-            [
+            [ 
                 [
                     InlineKeyboardButton(
-                        "🛠 Source Code 🛠", url="https://github.com/Infinity-Bots/GroupMusicPlayerBot")
+                        "📜 Kullanım Kılavuzu 📜", url="https://t.me/MissMusicSupport")
                   ],[
                     InlineKeyboardButton(
-                        "💬 Group", url="https://t.me/InfinityBOTs_Support"
-                    ),
-                    InlineKeyboardButton(
-                        "🔊 Channel", url="https://t.me/Infinity_BOTs"
+                        "🥳 Asistan 🥳", url="https://t.me/MissMuzikAsistan"
                     )
                 ],[ 
                     InlineKeyboardButton(
-                        "➕ Add To Your Group ➕", url="https://t.me/JEGroupMusicPlayerBot?startgroup=true"
-                    )]
+                        "Destek Grubu 🎙️", url="https://t.me/intikamtimii"
+                    )],
+                [
+                    InlineKeyboardButton(text= "DC BOTUMUZ", url = "https://t.me/intikamdcbot")
+                ]
             ]
         ),
      disable_web_page_preview=True
     )
 
-@Client.on_message(filters.command("start") & ~filters.private & ~filters.channel)
+@Client.on_message(filters.command("test") & ~filters.private & ~filters.channel)
 async def gstart(_, message: Message):
-      await message.reply_text("""**Group Music Player Online ✅**""",
+      await message.reply_text("""**🔴Müzik Bot Sorunsuz Çalışıyor...**""",
       reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "🔊 Channel", url="https://t.me/Infinity_BOTs")
+                        "🎙️ Destek Grubu 🎙️", url="https://t.me/intikamtimii")
                 ]
             ]
         )
    )
-
-
