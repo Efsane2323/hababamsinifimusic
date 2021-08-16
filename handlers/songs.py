@@ -11,66 +11,57 @@ def time_to_seconds(time):
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(':'))))
 
 
+@Client.on_message(filters.command('song') & ~filters.private & ~filters.channel)
+def song(client, message):
 
-@Client.on_message(command("bul") & other_filters)
-@errors
-async def a(client, message: Message):
+    user_id = message.from_user.id 
+    user_name = message.from_user.first_name 
+    rpk = "["+user_name+"](tg://user?id="+str(user_id)+")"
+
     query = ''
     for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
-    m = await message.reply(f"**{Bn} :-** 🔍 Aranıyor {query}")
+    m = message.reply('🔎 Finding the song...')
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
-        results = []
-        count = 0
-        while len(results) == 0 and count < 6:
-            if count>0:
-                time.sleep(1)
-            results = YoutubeSearch(query, max_results=1).to_dict()
-            count += 1
-        # results = YoutubeSearch(query, max_results=1).to_dict()
-        try:
-            link = f"https://youtube.com{results[0]['url_suffix']}"
-            # print(results)
-            title = results[0]["title"]
-            thumbnail = results[0]["thumbnails"][0]
-            duration = results[0]["duration"]
+        results = YoutubeSearch(query, max_results=1).to_dict()
+        link = f"https://youtube.com{results[0]['url_suffix']}"
+        #print(results)
+        title = results[0]["title"][:40]       
+        thumbnail = results[0]["thumbnails"][0]
+        thumb_name = f'thumb{title}.jpg'
+        thumb = requests.get(thumbnail, allow_redirects=True)
+        open(thumb_name, 'wb').write(thumb.content)
 
-            ## SÜRE SıNıRı ISTIYORSANıZ BUNU KULLANıMDAN KALDıRıLSıN. 1800'LERI KENDI ÖNCEDEN BELIRLENMIŞ SÜRENIZE DEĞIŞTIRIN VE MESAJ (30 dakika üst SıNıRı) SıNıRıNı SANIYELER IÇINDE DÜZENLEYIN
-            # if time_to_seconds(duration) >= 1800:  # süre sınırı
-            #     m.edit("Exceeded 30mins cap")
-            #     return
 
-            views = results[0]["views"]
-            thumb_name = f'thumb{message.message_id}.jpg'
-            thumb = requests.get(thumbnail, allow_redirects=True)
-            open(thumb_name, 'wb').write(thumb.content)
+        duration = results[0]["duration"]
+        url_suffix = results[0]["url_suffix"]
+        views = results[0]["views"]
 
-        except Exception as e:
-            m.edit(f"**{Bn} :-** 😕 Hiçbir şey bulamadım. Yazımı biraz değiştirmeyi dene..\n\n{e}")
-            return
     except Exception as e:
         m.edit(
-           f"**{Bn} :-** 😕 Hiçbir şey bulamadım. Üzgünüm.\n\nBaşka bir kelime deneyin veya düzgün düzenleyin."
+            "❌ Found Nothing.\n\nTry another keywork or maybe spell it properly."
         )
         print(str(e))
         return
-    await m.edit(f"**{Bn} :-** 📥 Indiriyor...\n**Query :-** {query}")
+    m.edit("Downloading the song by @Infinity_BOTs...")
     try:
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = f'🎶 **Başlık:** [{title[:35]}]({link})\n⏳ **Süre:** {duration}\n👀 **Görünümler:** {views}'
+        rep = '**🎵 Uploaded by @Infinity_BOTs**'
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
             secmul *= 60
-        await  message.reply_audio(audio_file, caption=rep, parse_mode='md',quote=False, title=title, duration=dur, thumb=thumb_name)
-        await m.delete()
+        message.reply_audio(audio_file, caption=rep, thumb=thumb_name, parse_mode='md', title=title, duration=dur)
+        m.delete()
     except Exception as e:
-        m.edit(f"❌ Hata!! \n\n{e}")
+        m.edit('❌ Error')
+        print(e)
+
     try:
         os.remove(audio_file)
         os.remove(thumb_name)
