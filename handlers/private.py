@@ -37,7 +37,7 @@ async def gstart(_, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "🔊 Channel", url="https://t.me/intikamtimii")
+                        "🔊 Destek", url="https://t.me/intikamtimii")
                 ]
             ]
         )
