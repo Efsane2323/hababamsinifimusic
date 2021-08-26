@@ -20,7 +20,7 @@ async def start(_, message: Message):
                     )
                 ],[ 
                     InlineKeyboardButton(
-                        "Destek Grubu 🎙️", url="https://t.me/intikamtimii"
+                        "Sohbet Grubumuz 🎙️", url="https://t.me/intikamailesi"
                     )],
                 [
                     InlineKeyboardButton(text= "DC BOTUMUZ", url = "https://t.me/intikamdcbot")
@@ -37,7 +37,7 @@ async def gstart(_, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "🔊 Destek", url="https://t.me/intikamtimii")
+                        "🔊 Destek", url="https://t.me/intikamailesi")
                 ]
             ]
         )
