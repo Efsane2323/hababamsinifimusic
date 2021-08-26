@@ -42,7 +42,7 @@ def time_to_seconds(time):
 @Client.on_message(filters.command('bul') & ~filters.private & ~filters.channel)
 @errors
 @authorized_users_only
-def song(client, message):
+async def song(client, message):
 
     user_id = message.from_user.id 
     user_name = message.from_user.first_name 
