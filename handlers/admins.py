@@ -29,6 +29,7 @@ from helpers.gets import get_url, get_file_name
 
 @Client.on_message(command("oynat") & other_filters)
 @errors
+@authorized_users_only
 async def oynat(_, message: Message):
     audio = (message.reply_to_message.audio or message.reply_to_message.voice) if message.reply_to_message else None
     url = get_url(message)
