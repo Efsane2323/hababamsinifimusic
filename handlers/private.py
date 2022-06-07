@@ -13,17 +13,17 @@ async def start(_, message: Message):
             [ 
                 [
                     InlineKeyboardButton(
-                        "📜 Kullanım Kılavuzu 📜", url="https://t.me/MissMusicSupport")
+                        "📜 Kullanım Kılavuzu 📜", url="https://t.me/Sohbetttadinda")
                   ],[
                     InlineKeyboardButton(
-                        "🥳 Asistan 🥳", url="https://t.me/MissMuzikAsistan"
+                        "🥳 Asistan 🥳", url="https://t.me/hababammusicAsistan"
                     )
                 ],[ 
                     InlineKeyboardButton(
-                        "Sohbet Grubumuz 🎙️", url="https://t.me/intikamailesi"
+                        "Sohbet Grubumuz 🎙️", url="https://t.me/hababammsinifi"
                     )],
                 [
-                    InlineKeyboardButton(text= "DC BOTUMUZ", url = "https://t.me/intikamdcbot")
+                    InlineKeyboardButton(text= "MUSİC BOTUMUZ", url = "https://t.me/hababammsinifi")
                 ]
             ]
         ),
@@ -37,7 +37,7 @@ async def gstart(_, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "🔊 Destek", url="https://t.me/intikamailesi")
+                        "🔊 Destek", url="https://t.me/Sohbetttadinda")
                 ]
             ]
         )
